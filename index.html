@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pin Generator</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="pin-generator half-width">
+                    <input class="form-control" type="text" id="pin-generator">
+                    <button id="generateBtn" class="generate-btn">Generate Pin</button>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="input-section half-width">
+                    <input id="display" class="form-control" type="text">
+                    <div class="numbers">
+                        <div class="calc-body">
+                            <div class="calc-button-row">
+                              <div class="button" id="addSeven">7</div>
+                              <div class="button" id="addEight">8</div>
+                              <div class="button" id="addNine">9</div>
+                            </div>
+                            <div class="calc-button-row">
+                              <div class="button" id="addFour">4</div>
+                              <div class="button" id="addFive">5</div>
+                              <div class="button" id="addSix">6</div>
+                            </div>
+                            <div class="calc-button-row">
+                              <div class="button" id="addOne">1</div>
+                              <div class="button" id="addTwo">2</div>
+                              <div class="button" id="addThree">3</div>
+                            </div>
+                            <div class="calc-button-row">
+                                <div class="button" id="delete-button"><</div>
+                                <div class="button" id="addZero">0</div>
+                                <div class="button" id="addCancel">C</div>
+                            </div>
+                            <div>
+                                <button type="submit" class="submit-btn" id="submit-match">Submit</button>
+                                <p class="action-left"><span id="actionLeft">3</span>  try left</p>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="notify-section">
+            <p class="notify" id="notifyUnmatch">❌ Pin Didn't Match, Please try again</p>
+            <p class="notify" id="notifyMatch">✅ Pin Matched... Secret door is opening for you</p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("generateBtn").addEventListener("click", function(){
+            const generateNumber = Math.floor(1000 + Math.random() * 9000);
+            document.getElementById("pin-generator").value = generateNumber;
+        })
+
+
+        document.getElementById("addSeven").addEventListener("click", function(){
+            updateNumber(addSeven,7);
+        })
+
+        document.getElementById("addEight").addEventListener("click", function(){
+            updateNumber(addSeven,8);
+        })
+
+        document.getElementById("addNine").addEventListener("click", function(){
+            updateNumber(addSeven,9);
+        })
+
+        document.getElementById("addFour").addEventListener("click", function(){
+            updateNumber(addSeven,4);
+        })
+
+        document.getElementById("addFive").addEventListener("click", function(){
+            updateNumber(addSeven,5);
+        })
+
+        document.getElementById("addSix").addEventListener("click", function(){
+            updateNumber(addSeven,6);
+        })
+
+        document.getElementById("addThree").addEventListener("click", function(){
+            updateNumber(addSeven,3);
+        })
+
+        document.getElementById("addTwo").addEventListener("click", function(){
+            updateNumber(addSeven,2);
+        })
+
+        document.getElementById("addOne").addEventListener("click", function(){
+            updateNumber(addSeven,1);
+        })
+
+        document.getElementById("addZero").addEventListener("click", function(){
+            updateNumber(addSeven,0);
+        })
+
+        document.getElementById("addCancel").addEventListener("click", function(){
+            document.getElementById("display").value ="";
+        })
+
+        document.getElementById("delete-button").addEventListener("click", function(){
+            let value = document.getElementById("display").value
+            document.getElementById("display").value = value.substr(0, value.length - 1);
+        })
+
+        function updateNumber(id,n){
+            document.getElementById("display").value += n;
+        }
+
+
+        document.getElementById("submit-match").addEventListener("click", function(){
+            if( document.getElementById("pin-generator").value == document.getElementById("display").value){
+                notifyMatch.style.display = "block";
+                notifyUnmatch.style.display = "none";
+            }
+            else{
+                notifyUnmatch.style.display = "block";
+                notifyMatch.style.display = "none";
+
+                
+                for (let i = 2; i >= 0; i--) {
+
+                    let left = 0
+                    for (let i = 2; i >= 0; i--) {
+                        element = i;
+                        if(element>=left){
+                            left = element;
+                            document.getElementById("actionLeft").innerHTML = left;
+                            
+                        }
+                        
+
+                    }
+
+                    
+                    
+                }
+
+            }
+        })
+        
+    </script>
+
+</body>
+</html>
